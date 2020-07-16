@@ -1,0 +1,19 @@
+{
+  "name": "layerconvert",
+  "version": "1.0.0",
+  "description": "flat object via rules",
+  "main": "index.js",
+  "module": "main.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "flat",
+    "convert"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "esm": "^3.2.25"
+  }
+}
