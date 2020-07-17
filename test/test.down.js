@@ -103,8 +103,19 @@ describe('convert rule', () => {
     });
   });
   describe('get param from express', () => {
+    it('6 has no param', () => {
+      expect(rule.getParamsArray('6')).to.be.an('array').that.is.empty;
+    });
     it('-6 has no param', () => {
       expect(rule.getParamsArray('-6')).to.be.an('array').that.is.empty;
+    });
+    it('-6 * a has param [a]', () => {
+      const param = rule.getParamsArray('-6*a');
+      expect(param).to.be.an('array').that.not.is.empty;
+    });
+    it('-price * amount has param [price amount]', () => {
+      const param = rule.getParamsArray('-price * amount');
+      expect(param).to.be.an('array').that.not.is.empty;
     });
   });
 });
