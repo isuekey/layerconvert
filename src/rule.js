@@ -4,26 +4,27 @@ const isExpression = (str) => {
   return isExpressRegexp.test(str);
 };
 
-const paramRegex = /\W*([a-zA-Z]\w*)\s*(?![\[\(])/g;
+const paramRegex = /\W*([a-zA-Z][\w\.]*)\s*(?![\w\[\(]+)/g;
 const getParamsArrayInExpressionString = (str) => {
   if(!str) return [];
   let exec = paramRegex.exec(str);
   let id = 0;
+  const params=[];
   while(exec) {
-    console.log('get params', ++id, exec, 'from', str);
+    // console.log('get params', ++id, exec, 'from', str);
+    params.push(exec[1]);
     exec = paramRegex.exec(str);
   }
-  if(!exec) return [];
-  return [];
+  return params;
 };
 const getParamsArray = getParamsArrayInExpressionString;
 
-const expressRuleToString = (str) => {
-  return isExpression.test(str);
+const expressRule = (str) => {
+  
 };
 
 export {
-  expressRuleToString,
+  expressRule,
   isExpression,
   getParamsArray
 }
