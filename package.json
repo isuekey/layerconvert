@@ -5,7 +5,7 @@
   "main": "index.js",
   "module": "main.js",
   "scripts": {
-    "test": "test"
+    "test": "mocha"
   },
   "keywords": [
     "flat",
@@ -16,5 +16,9 @@
   "dependencies": {
     "esm": "^3.2.25"
   },
-  "repository": "git@github.com:isuekey/layerconvert.git"
+  "repository": "git@github.com:isuekey/layerconvert.git",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^8.0.1"
+  }
 }

@@ -1,2 +1,6 @@
 // ESM syntax is supported.
-export {}
+
+export * from './src';
+
+export {
+};
