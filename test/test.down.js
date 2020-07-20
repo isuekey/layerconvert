@@ -17,11 +17,21 @@ describe('convert down pass', ()=>{
       
     });
   });
-  describe('simple base parse', () => {
-    it('simple converted', ()=> {
+  describe('simple convert parse', () => {
+    it(`it hould have 'id','serial','bill', 'orders', 'finish'`, ()=> {
       const parsed = down.downConvertBase(downData.upstream, downData.downRule, {});
       // console.log('simple convert',parsed);
       expect(parsed).to.have.own.all.keys('id','serial','bill', 'orders', 'finish');
+    });
+  });
+  describe('simple convert parse from {append:"append"}', () => {
+      const parsed = down.downConvertBase(downData.upstream, downData.downRule, downData.base);
+    it(`it should have 'id','serial','bill', 'orders', 'finish', 'append' `, ()=> {
+      // console.log('simple convert',parsed);
+      expect(parsed).to.have.own.all.keys('id','serial','bill', 'orders', 'finish', 'append');
+    });
+    it('its finish is append', () => {
+      expect(parsed.finish).to.equal('-');
     });
   });
 });
