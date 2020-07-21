@@ -1,5 +1,5 @@
 
-const upstream = {
+const upstreamData = {
   // data:'value',
   aNumber:1,
   bString:"123",
@@ -33,7 +33,8 @@ const downRule = {
     [Symbol.for('type')]:"array",
     amount:'price * quantity',
   },
-  finish:'[append, serial].join("-")'
+  finish:'[append, serial].join("-")',
+  billQuantity:'order.quantity'
 };
 
 const base = {
@@ -69,14 +70,23 @@ const expected = {
     { price:4.99, goods:'苹果', quantity:1.5, unit:'斤', amount:7.485 },
   ],
   append:'append',
-  finish:'append-123'
+  finish:'append-123',
+  orderQuantity:1
 };
 
 const down = {
-  upstream, downRule, base, expected
+  upstream:upstreamData, downRule, base, expected
+};
+
+const upstreamRule = {
+};
+
+const upstream = {
+  upstreamRule
 };
 
 module.exports= {
-  down
+  down,
+  upstream
 };
 

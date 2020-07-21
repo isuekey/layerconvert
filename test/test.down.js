@@ -3,7 +3,7 @@ const { assert, expect, should } = require('chai');
 const database = require('./test.data.js');
 const {down:downData} = database;
 
-describe('convert down pass', ()=>{
+describe('convert down parse', ()=>{
   const {rule,down} = convert;
   describe('down rule parse function', () => {
     it('down rule parse expression', () => {
@@ -18,17 +18,24 @@ describe('convert down pass', ()=>{
     });
   });
   describe('simple convert parse', () => {
-    it(`it hould have 'id','serial','bill', 'orders', 'finish'`, ()=> {
-      const parsed = down.downConvertBase(downData.upstream, downData.downRule, {});
+    const parsed = down.downConvertBase(downData.upstream, downData.downRule, {});
+    it(`it hould have 'id','serial','bill', 'orders', 'finish', 'billQuantity'`, ()=> {
       // console.log('simple convert',parsed);
-      expect(parsed).to.have.own.all.keys('id','serial','bill', 'orders', 'finish');
+      expect(parsed).to.have.own.all.keys('id','serial','bill', 'orders', 'finish', 'billQuantity');
+    });
+    it('parsed.billQuantity is equal upstream.order.quantity:1', () => {
+      expect(parsed.billQuantity).to.equal(downData.upstream.order.quantity);
+    });
+    it('parsed.bill.amount is equal upstream.order.price * upstream.order.quantity', ()=>{
+      const order = downData.upstream.order;
+      expect(parsed.bill.amount).to.equal(order.price * order.quantity);
     });
   });
   describe('simple convert parse from {append:"append"}', () => {
     const parsed = down.downConvertBase(downData.upstream, downData.downRule, downData.base);
-    it(`it should have 'id','serial','bill', 'orders', 'finish', 'append' `, ()=> {
+    it(`it should have 'id','serial','bill', 'orders', 'finish', 'append', 'billQuantity' `, ()=> {
       // console.log('simple convert',parsed);
-      expect(parsed).to.have.own.all.keys('id','serial','bill', 'orders', 'finish', 'append');
+      expect(parsed).to.have.own.all.keys('id','serial','bill', 'orders', 'finish', 'append', 'billQuantity');
     });
     it('its finish is append', () => {
       expect(parsed.finish).to.equal('-');
@@ -36,9 +43,9 @@ describe('convert down pass', ()=>{
   });
   describe('merge convert parse from {append:"append"}', () => {
     const parsed = down.downConvertMerge(downData.upstream, downData.downRule, downData.base);
-    it(`it should have 'aNumber','bString','order','orderList', 'id','serial','bill', 'orders', 'finish', 'append' `, ()=> {
+    it(`it should have 'aNumber','bString','order','orderList', 'id','serial','bill', 'orders', 'finish', 'append', 'billQuantity' `, ()=> {
       // console.log('simple convert',parsed);
-      expect(parsed).to.have.own.all.keys('aNumber','bString','order','orderList', 'id','serial','bill', 'orders', 'finish', 'append');
+      expect(parsed).to.have.own.all.keys('aNumber','bString','order','orderList', 'id','serial','bill', 'orders', 'finish', 'append', 'billQuantity');
     });
     it('its finish is append', () => {
       expect(parsed.finish).to.equal(downData.expected.finish);
