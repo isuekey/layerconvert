@@ -33,7 +33,7 @@ const downRule = {
     [Symbol.for('type')]:"array",
     amount:'price * quantity',
   },
-  finish:'[append, serial].join("-")',
+  finish:'[append, bString].join("-")',
   billQuantity:'order.quantity'
 };
 
@@ -78,11 +78,37 @@ const down = {
   upstream:upstreamData, downRule, base, expected
 };
 
+const local = {
+  id:1,
+  order:{
+    id:2,
+    goods:'苹果'
+  },
+  summary:{
+    remark:'ooo'
+  }
+};
+
 const upstreamRule = {
+  id:'id',
+  'order.id':'orderId',
+  'order':{
+    [Symbol.for('target')]:"goods",
+    [Symbol.for('type')]:"object",
+    'goods':'name'
+  }
+};
+
+const upstreamResult = {
+  id:1,
+  orderId:2,
+  goods:{
+    name:'苹果'
+  }
 };
 
 const upstream = {
-  upstreamRule
+  upstreamRule, local, base, expected:upstreamResult
 };
 
 module.exports= {

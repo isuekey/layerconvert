@@ -38,7 +38,7 @@ describe('convert down parse', ()=>{
       expect(parsed).to.have.own.all.keys('id','serial','bill', 'orders', 'finish', 'append', 'billQuantity');
     });
     it('its finish is append', () => {
-      expect(parsed.finish).to.equal('-');
+      expect(parsed.finish).to.equal('-123');
     });
   });
   describe('merge convert parse from {append:"append"}', () => {

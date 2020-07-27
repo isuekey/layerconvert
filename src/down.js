@@ -87,7 +87,7 @@ const downConvertNormalBase = (upstream={}, rules={}, target={}) => {
     });
     sum[curKey] = curExpress(...params);
     return sum;
-  }, target);
+  }, {...target});
   return normalParsed;
 };
 
