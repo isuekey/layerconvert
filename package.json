@@ -1,6 +1,6 @@
 {
   "name": "layerconvert",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "flat object via rules",
   "main": "index.js",
   "module": "main.js",
