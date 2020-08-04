@@ -95,6 +95,12 @@ describe('convert rule', () => {
       expect(param).to.have.lengthOf(1);
       expect(param[0]).to.equal('base');
     });
+    it('base.count * base.amount has param [base]', () => {
+      const param = rule.getParamsArray('base.count * base.amount');
+      expect(param).to.be.an('array').that.not.is.empty;
+      expect(param).to.have.lengthOf(1);
+      expect(param[0]).to.equal('base');
+    });
   });
   describe('rule parse function', () => {
     it('rule parse expression', () => {

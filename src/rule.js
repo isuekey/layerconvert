@@ -23,7 +23,10 @@ const getParamsArrayInExpressionString = (str) => {
   return params;
 };
 const getParamsArray = (str) => {
-  const params = getParamsArrayInExpressionString(str).filter(ele => !reservedMap[ele]);;
+  const hadParam ={};
+  const params = getParamsArrayInExpressionString(str).filter(ele => !reservedMap[ele]).filter(ele => {
+    return !hadParam[ele] && (hadParam[ele]=ele);
+  });
   return params;
 };
 const returnMap = {return:true};
