@@ -40,13 +40,10 @@ const downConvertNormalMerge = (upstream={}, rules={}, target={}) => {
       return sum;
     }
     if(!rule.isExpression(curRule)) {
-      sum[curKey] = upstream[curRule] || target[curRule];
-      if(!sum[curKey]){
-        if(typeof upstream[curRule] != undefined) {
-          sum[curKey] = upstream[curRule];
-        } else if(typeof target[curRule] != undefined) {
-          sum[curKey] = target[curRule];
-        }
+      if(typeof upstream[curRule] == 'undefined') {
+        sum[curKey] = target[curRule];
+      } else {
+        sum[curKey] = upstream[curRule];
       }
       return sum;
     }
