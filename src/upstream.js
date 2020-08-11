@@ -1,5 +1,5 @@
 
-import * as rule from './rule';
+import * as rule from './rule.js';
 
 const targetSymbol = Symbol.for('target');
 const typeSymbol = Symbol.for('type');

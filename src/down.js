@@ -1,4 +1,4 @@
-import * as rule from './rule';
+import * as rule from './rule.js';
 
 const scopeSymbol = Symbol.for('scope');
 const typeSymbol = Symbol.for('type');
