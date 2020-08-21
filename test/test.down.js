@@ -3,8 +3,8 @@ const { assert, expect, should } = require('chai');
 const database = require('./test.data.js');
 const {down:downData} = database;
 
+const {rule,down} = convert;
 describe('convert down parse', ()=>{
-  const {rule,down} = convert;
   describe('down rule parse function', () => {
     it('down rule parse expression', () => {
       const ruleParsed = rule.expressRule(downData.downRule.bill.tax);
@@ -58,3 +58,4 @@ describe('convert down parse', ()=>{
     });
   });
 });
+

@@ -4,8 +4,8 @@ const { assert, expect, should } = require('chai');
 const database = require('./test.data.js');
 const {down} = database;
 
-describe('convert rule', () => {
-  const rule = convert.rule;
+const rule = convert.rule;
+describe('common convert rule', () => {
   describe('check string is express', () => {
     it('6a is not expression', () => {
       expect(rule.isExpression('6a')).to.be.false;
@@ -113,4 +113,3 @@ describe('convert rule', () => {
   });
 });
 
-const storyTax = require('./data/story.tax.js');

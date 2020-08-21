@@ -34,7 +34,7 @@ const functionCache = {};
 const expressRule = (str, cache) => {
   if(cache && cache[str]) return cache[str];
   if(functionCache[str]) return functionCache[str];
-  const params = getParamsArrayInExpressionString(str);
+  const params = getParamsArray(str);
   const hasReturnKey = !!params.filter(ele => returnMap[ele])[0];
   const pureParams = params.filter(ele => !reservedMap[ele]);
   let func = null;
