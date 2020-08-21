@@ -112,3 +112,5 @@ describe('convert rule', () => {
     });
   });
 });
+
+const storyTax = require('./data/story.tax.js');
