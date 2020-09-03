@@ -57,3 +57,8 @@
   oppositeType:'MAIN',
   otherType:'REBATE',
 }
+* rule 中支持内部函数
+** 映射关系
+** 数据
+** 预期参数
+** 预期结果
