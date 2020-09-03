@@ -33,5 +33,27 @@
   realTax:66055.04587155963,
   realAmountTaxTree:733944.95,
 }
-
-
+* rule 中支持字符串
+** 映射关系
+{
+  currentType:"partyKind || 'MAIN'",
+  oppositeType:'oppositeKind || "REBATE"',
+  otherType:'otherKind || "REBATE"',
+}
+** 数据
+{
+  partyKind:'REBATE',
+  oppositeKind:'MAIN',
+}
+** 预期参数
+{
+  currentType:["partyKind"],
+  oppositeType:['oppositeKind'],
+  otherType:['otherKind']
+}
+** 预期结果
+{
+  currentType:'REBATE',
+  oppositeType:'MAIN',
+  otherType:'REBATE',
+}

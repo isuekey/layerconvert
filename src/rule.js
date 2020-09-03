@@ -41,6 +41,7 @@ const expressRule = (str, cache) => {
   if (hasReturnKey) {
     func = new Function(...pureParams, str);
   } else {
+    console.log('pureParams', pureParams, str);
     func = new Function(...pureParams, 'return ' + str);
   }
   functionCache[str]=func;
