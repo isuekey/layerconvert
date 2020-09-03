@@ -7,7 +7,13 @@ const reservedMap = {
   return:true,
   new:true,
   true:true,
-  false:true
+  false:true,
+  switch:true,
+  case:true,
+  const:true,
+  let:true,
+  function:true,
+  var:true,
 };
 const paramRegex = /\W*([a-zA-Z][\w\.]*)\s*(?![\w\[\(]+)/g;
 const getParamsArrayInExpressionString = (str) => {
@@ -30,7 +36,7 @@ const getParamsArray = (str) => {
   return params;
 };
 const returnMap = {return:true};
-const functionCache = {};
+const functionCache = new WeakMap();
 const expressRule = (str, cache) => {
   if(cache && cache[str]) return cache[str];
   if(functionCache[str]) return functionCache[str];
