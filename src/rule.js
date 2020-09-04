@@ -3,29 +3,78 @@ const isExpressRegexp = /\W/;
 const isExpression = (str) => {
   return isExpressRegexp.test(str);
 };
+const lexicalMap = {
+  undefined:true,
+  null:true,
+  true:true,
+  false:true,
+};
 const reservedMap = {
   return:true,
   new:true,
-  true:true,
-  false:true,
   switch:true,
   case:true,
   const:true,
   let:true,
   function:true,
   var:true,
+  ...lexicalMap,
 };
-const paramRegex = /\W*([a-zA-Z][\w\.]*)\s*(?![\w\[\(]+)/g;
+const jsNameStart="[a-zA-Z_$]";
+const jsName= [jsNameStart, "(?:_|\\w)*"].join('');
+const jsStateDelimiter = ";?\\s*\n|{\\s*\n";
+const jsLexicalString = `".*?"|'.*?'`;
+const jsVariableDeclareStart = [
+  "\\s*(?:(?:var|const|let)\\s+)",
+].join('');
+const jsLocalVariable = [
+  jsVariableDeclareStart,
+  "((?:\\s*", jsName, "\\s*,)*",
+  "(?:\\s*", jsName, "))\\s*=?\\s*"
+].join('');
+const jsDottedVariable = [
+  "(",jsName,")(?!\\s*[\\w\\[\\(]+)",
+  "(?:\\.", jsName, ")*"
+].join('');;
+
+const pickIdentifier = (pickReg, code, keyCache={}, pickIndex=1) => {
+  let result = pickReg.exec(code);
+  if(!result) return [];
+  if(!pickReg.global) {
+    keyCache[result[pickIndex]] = true;
+    return [result[pickIndex]];
+  }
+  const picked = [];
+  while(result) {
+    keyCache[result[pickIndex]] = true;
+    picked.push(result[pickIndex]);
+    result = pickReg.exec(code);
+  }
+  return picked;
+};
+
+const stateDelimiterReg = new RegExp(jsStateDelimiter);
+const lexicalStringReg = new RegExp(jsLexicalString);
+const localVariableReg = new RegExp(jsLocalVariable, 'g');
+const dottedVariableReg = new RegExp(jsDottedVariable, 'g');
 const getParamsArrayInExpressionString = (str) => {
   if(!str) return [];
-  let exec = paramRegex.exec(str);
-  let id = 0;
-  const params=[];
-  while(exec) {
-    // console.log('get params',str, ++id, exec, 'from', exec[1].split('\.')[0]);
-    params.push(exec[1].split('\.')[0]);
-    exec = paramRegex.exec(str);
-  }
+  const localVariableMap = {};
+  const paramMap = {};
+  const params = str.split(stateDelimiterReg).map((statement)=>{
+    const codeArray = statement.split(lexicalStringReg).map(code => {
+      pickIdentifier(localVariableReg, code, localVariableMap);
+      const variableList = pickIdentifier(dottedVariableReg, code, paramMap).filter(ele => !reservedMap[ele]);
+      return variableList;
+    });
+    return codeArray.reduce((sum, cur) => {
+      sum.push(...cur);
+      return sum;
+    }, []);
+  }).reduce((sum, cur) => {
+    sum.push(...cur);
+    return sum;
+  }, []).filter(ele => !localVariableMap[ele]);
   return params;
 };
 const getParamsArray = (str) => {
@@ -35,6 +84,7 @@ const getParamsArray = (str) => {
   });
   return params;
 };
+
 const returnMap = {return:true};
 const functionCache = new WeakMap();
 const expressRule = (str, cache) => {
@@ -47,8 +97,10 @@ const expressRule = (str, cache) => {
   if (hasReturnKey) {
     func = new Function(...pureParams, str);
   } else {
-    console.log('pureParams', pureParams, str);
-    func = new Function(...pureParams, 'return ' + str);
+    const codeArray = str.split( stateDelimiterReg );
+    const last = 'return ' + codeArray.pop();
+    const funcBody = [...codeArray, last].join('');
+    func = new Function(...pureParams, funcBody);
   }
   functionCache[str]=func;
   if(cache){ cache[str] = func; }

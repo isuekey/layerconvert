@@ -8,7 +8,7 @@ describe('story lexical string in rule', ()=>{
   it('lexical string rule', ()=>{
     expect(rule.isExpression(storyLexicalString.rule.currentType)).to.equal(true);
     const params = rule.getParamsArray(storyLexicalString.rule.currentType);
-    expect(params).to.have.lengthOf(2);
+    expect(params).to.have.lengthOf(1);
     expect(params).to.have.deep.equal(storyLexicalString.params.currentType);
   });
 });
@@ -29,3 +29,11 @@ describe('story lexical string down', ()=>{
   });
 });
 
+describe('find lexical string', ()=>{
+  const testString = `
+    const a = 'yyy';
+    const b = yyy;
+    const c = 'c';
+    return a + b + c;
+  `;
+});
