@@ -71,7 +71,7 @@ const expected = {
   ],
   append:'append',
   finish:'append-123',
-  orderQuantity:1
+  billQuantity:1
 };
 
 const down = {

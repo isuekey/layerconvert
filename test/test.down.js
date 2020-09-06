@@ -25,6 +25,7 @@ describe('convert down parse', ()=>{
     });
     it('parsed.billQuantity is equal upstream.order.quantity:1', () => {
       expect(parsed.billQuantity).to.equal(downData.upstream.order.quantity);
+      expect(parsed.billQuantity).to.equal(downData.expected.billQuantity);
     });
     it('parsed.bill.amount is equal upstream.order.price * upstream.order.quantity', ()=>{
       const order = downData.upstream.order;
