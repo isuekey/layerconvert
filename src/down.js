@@ -49,8 +49,11 @@ const downConvertNormalMerge = (upstream={}, rules={}, target={}) => {
     }
     const curExpress = rule.expressRule(curRule);
     const params = rule.getParamsArray(curRule).map(ele => {
-      return upstream[ele] || target[ele];
+      const upE = upstream[ele], ttE = target[ele];
+      const upEisUndefined = typeof upE == 'undefined';
+      return !upEisUndefined ? upE : ttE;
     });
+    // console.log('down', params, curRule);
     sum[curKey] = curExpress(...params);
     return sum;
   }, merged);

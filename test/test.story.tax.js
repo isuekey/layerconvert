@@ -37,4 +37,13 @@ describe('story tax calculate down', () => {
     expect(parsed.realAmountTaxFree).to.be.a('number');
     expect(parsed.realAmountTaxFree).to.equal(storyTax.result.realAmountTaxFree);
   });
+  
+  it('relationFromUndefined calculate', () => {
+    expect(parsed.relationFromUndefined).to.be.a('boolean');
+    expect(parsed.relationFromUndefined).to.equal(storyTax.result.relationFromUndefined);
+  });
+  it('relationFromValue calculate', () => {
+    expect(parsed.relationFromValue).to.be.a('boolean');
+    expect(parsed.relationFromValue).to.equal(storyTax.result.relationFromValue);
+  });
 });

@@ -101,6 +101,12 @@ describe('common convert rule', () => {
       expect(param).to.have.lengthOf(1);
       expect(param[0]).to.equal('base');
     });
+    it('count < 1 && true has param count', () => {
+      const param = rule.getParamsArray('count < 1 && true ');
+      expect(param).to.be.an('array').that.not.is.empty;
+      expect(param).to.have.lengthOf(1);
+      expect(param[0]).to.equal('count');
+    });
   });
   describe('rule parse function', () => {
     it('rule parse expression', () => {

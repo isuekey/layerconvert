@@ -10,6 +10,8 @@ exports.rule = {
   realAmount:"invoiceTotalPriceTax + ( discountAmount || 0 )",
   realTax:"(( invoiceTotalPriceTax + ( discountAmount || 0 )) * consolidatedTaxRate / (1 + consolidatedTaxRate )).toFixed(2)",
   realAmountTaxFree:"( invoiceTotalPriceTax + ( discountAmount || 0 )) - (( invoiceTotalPriceTax + ( discountAmount || 0 )) * consolidatedTaxRate / (1 + consolidatedTaxRate )).toFixed(2)",
+  relationFromUndefined:'count < 1',
+  relationFromValue:'countValue < 1',
 };
 
 exports.data = {
@@ -18,6 +20,7 @@ exports.data = {
   invoiceTotalTax: 82568.81,
   invoiceTotalPrice: 917431.19,
   discountAmount: -200000,
+  countValue:0
 };
 
 exports.result = {
@@ -31,5 +34,7 @@ exports.result = {
   realAmount:800000,
   realTax:'66055.05',
   realAmountTaxFree:733944.95,
+  relationFromUndefined: false,
+  relationFromValue: true,
 };
 
