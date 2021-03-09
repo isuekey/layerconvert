@@ -3,7 +3,7 @@
   "version": "1.0.8",
   "description": "flat object via rules",
   "main": "dist/layerconvert.js",
-  "types": "dist/layerconvert.d.ts",
+  "types": "dist/index.d.ts",
   "module": "src/index.js",
   "scripts": {
     "test": "mocha",
