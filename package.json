@@ -3,10 +3,12 @@
   "version": "1.0.8",
   "description": "flat object via rules",
   "main": "dist/layerconvert.js",
+  "types": "dist/layerconvert.d.ts",
   "module": "src/index.js",
   "scripts": {
     "test": "mocha",
-    "build": "webpack"
+    "build": "webpack",
+    "tsd":""
   },
   "keywords": [
     "flat",
@@ -19,6 +21,9 @@
     "chai": "^4.2.0",
     "esm": "^3.2.25",
     "mocha": "^8.0.1",
+    "source-map-loader": "^2.0.1",
+    "ts-loader": "^8.0.17",
+    "typescript": "^4.2.3",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
   }
