@@ -1,14 +1,14 @@
 {
   "name": "layerconvert",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "flat object via rules",
   "main": "dist/layerconvert.js",
-  "types": "dist/layerconvert.d.ts",
+  "types": "dist/index.d.ts",
   "module": "src/index.js",
   "scripts": {
     "test": "mocha",
     "build": "webpack",
-    "tsd":""
+    "tsd":"npx typescript"
   },
   "keywords": [
     "flat",
