@@ -40,4 +40,9 @@
 其实可以用的已有的解析工具处理，参考了源码之后，功能都非常棒，但不是最初的本义。不过这个工具应该可以通过扩展来引入这些解析工具，使得我们能够改善、增强。
 
 ### 作弊 ###
-还可以完全不解析，都有js来完成，但是function
+还可以完全不解析，都有js来完成，但是functio
+
+## 使用 typescript 描述定义文件 ##
+  * yarn add -D typescript
+  * typescript 3.7 之后的版本提供从js文件生成.d.ts的功能
+  * npx typescript src/index.js --declaration --allowJs --emitDeclarationOnly --outDir dist
