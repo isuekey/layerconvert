@@ -81,7 +81,7 @@ const downConvertNormalBase = (upstream={}, rules={}, target={}) => {
   const normalParsed = Object.keys(rules).reduce((sum, curKey) => {
     const curRule = rules[curKey];
     if(curRule[scopeSymbol]) {
-      sum[curKey] = downConvertBase(upstream[curRule[scopeSymbol]], curRule, {});
+      sum[curKey] = downConvertBase(upstream[curRule[scopeSymbol]] || upstream, curRule, sum[curKey]);
       return sum;
     }
     if(!rule.isExpression(curRule)) {

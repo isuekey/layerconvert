@@ -1,6 +1,6 @@
 {
   "name": "layerconvert",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "flat object via rules",
   "main": "dist/layerconvert.js",
   "types": "dist/index.d.ts",
@@ -16,7 +16,7 @@
   ],
   "author": "liuhanru <isuekey@163.com>",
   "license": "MIT",
-  "repository": "git@github.com:isuekey/layerconvert.git",
+  "repository": "https://github.com/isuekey/layerconvert",
   "devDependencies": {
     "chai": "^4.2.0",
     "esm": "^3.2.25",

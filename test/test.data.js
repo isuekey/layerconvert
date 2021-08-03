@@ -34,7 +34,7 @@ const downRule = {
     amount:'price * quantity',
   },
   finish:'[append, bString].join("-")',
-  billQuantity:'order.quantity'
+  billQuantity:'order.quantity',
 };
 
 const base = {

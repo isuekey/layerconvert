@@ -1,5 +1,5 @@
 
-const isExpressRegexp = /\W/;
+const isExpressRegexp = /[^a-zA-Z0-9_]/;
 const isExpression = (str) => {
   return isExpressRegexp.test(str);
 };
