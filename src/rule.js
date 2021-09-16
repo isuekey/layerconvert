@@ -3,23 +3,14 @@ const isExpressRegexp = /[^a-zA-Z0-9_]/;
 const isExpression = (str) => {
   return isExpressRegexp.test(str);
 };
-const lexicalMap = {
-  undefined:true,
-  null:true,
-  true:true,
-  false:true,
-};
-const reservedMap = {
-  return:true,
-  new:true,
-  switch:true,
-  case:true,
-  const:true,
-  let:true,
-  function:true,
-  var:true,
-  ...lexicalMap,
-};
+const literalValue="undefined,null,true,false,eval,NaN,Infinity".split(',');
+const reservedValue="break,case,catch,class,const,continue,debugger,default,delete,do,else,export,extends,finally,for,function,if,import,in,instanceof,new,return,super,switch,this,throw,try,typeof,var,void,while,with,yield".split(',');
+const globalValue="Array,ArrayBuffer,Atomics,BigInt,BigInt64Array,BigUint64Array,Boolean,DataView,Date,Errors,Float32Array,Float64Array,Function,JSON,Math,Map,Number,Object,Promise,Proxy,Set,String,Symbol,WeakMap,WeakSet".split(',');
+const reservedMap = literalValue.concat(reservedValue, globalValue).reduce((sum,key)=>{
+  sum[key]=true;
+  return sum;
+},{});
+
 const jsNameStart="[a-zA-Z_$]";
 const jsName= [jsNameStart, "(?:_|\\w)*"].join('');
 const jsStateDelimiter = ";?\\s*\n|{\\s*\n";
